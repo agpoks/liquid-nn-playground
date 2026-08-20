@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="liquid-nn-playground logo">
+  <defs>
+    <linearGradient id="blob" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0891b2"/>
+      <stop offset="100%" stop-color="#4f46e5"/>
+    </linearGradient>
+    <radialGradient id="sheen" cx="35%" cy="25%" r="65%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <path fill="url(#blob)" d="M100,18 C142,17 182,48 180,96 C178,142 146,182 99,182
+           C53,182 21,146 20,99 C19,53 58,19 100,18 Z"/>
+  <path fill="url(#sheen)" d="M100,18 C142,17 182,48 180,96 C178,142 146,182 99,182
+           C53,182 21,146 20,99 C19,53 58,19 100,18 Z"/>
+
+  <!-- liquid flow lines -->
+  <path d="M35,132 C55,120 65,144 85,132 C105,120 115,144 135,132 C150,123 158,128 165,124"
+        fill="none" stroke="#ffffff" stroke-opacity="0.28" stroke-width="3" stroke-linecap="round"/>
+  <path d="M32,150 C52,140 64,160 84,150 C104,140 116,160 136,150 C148,144 154,147 160,144"
+        fill="none" stroke="#ffffff" stroke-opacity="0.16" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- neural net overlay -->
+  <g stroke="#ffffff" stroke-opacity="0.75" stroke-width="2.4">
+    <line x1="70" y1="66" x2="100" y2="96"/>
+    <line x1="130" y1="62" x2="100" y2="96"/>
+    <line x1="70" y1="66" x2="130" y2="62"/>
+    <line x1="100" y1="96" x2="58" y2="118"/>
+    <line x1="100" y1="96" x2="142" y2="114"/>
+    <line x1="58" y1="118" x2="96" y2="140"/>
+    <line x1="142" y1="114" x2="96" y2="140"/>
+  </g>
+  <g fill="#ffffff">
+    <circle cx="70" cy="66" r="7"/>
+    <circle cx="130" cy="62" r="7"/>
+    <circle cx="100" cy="96" r="8.5"/>
+    <circle cx="58" cy="118" r="6.5"/>
+    <circle cx="142" cy="114" r="6.5"/>
+    <circle cx="96" cy="140" r="7.5"/>
+  </g>
+</svg>

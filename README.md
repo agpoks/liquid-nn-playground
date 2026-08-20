@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="docs/source/_static/logo-banner.svg" alt="liquid-nn-playground" width="520">
+</p>
+
 # liquid-nn-playground
 
 A playground for **liquid neural networks**: implement, run, and benchmark

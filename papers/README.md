@@ -46,6 +46,31 @@ aren't separate architectures modeled here:
   Networks and LSTM..."* ([arXiv:2605.27467](https://arxiv.org/abs/2605.27467))
   benchmark the architectures above rather than introducing new ones.
 
+## Liquid NNs in the wild -- further reading
+
+Papers above are the primary sources; these are more accessible write-ups and
+real deployments, useful for building intuition or seeing the models used
+outside a benchmark table:
+
+- [Drones navigate unseen environments with liquid neural networks](https://www.csail.mit.edu/news/drones-navigate-unseen-environments-liquid-neural-networks)
+  (MIT CSAIL, 2023) -- the flagship real-world result: CfC-piloted drones
+  generalizing to forests and urban scenes never seen in training.
+- [Applying Liquid Neural Networks (LNN) in Self-Driving Labs (SDL)](https://medium.com/@isissifeng/applying-liquid-neural-networks-lnn-in-self-driving-labs-sdl-837447b7df5e)
+  (Sissi Feng, Medium) -- LNNs for closed-loop, adaptive control in autonomous
+  chemistry/materials labs, a domain outside vision/robotics.
+- [Neural Circuit Policy: training autonomous vehicles using models inspired by the nervous system](https://ved933409.medium.com/neural-circuit-policy-training-a-autonomous-vehicles-using-models-inspired-by-nervous-system-db79a554ebef)
+  (Ved Prakash, Medium) -- compares random, fully-connected, and NCP wiring
+  head-to-head on a driving task; a good companion to [`models/ncp`](../models/ncp).
+- [TinyML -- Liquid Neural Networks](https://medium.com/@thommaskevin/tinyml-liquid-neural-networks-e5978f222dd7)
+  (thommaskevin, Medium) -- walks the LTC ODE and fixed-step Euler update by
+  hand with worked numbers, good if the equations in [`models/ltc`](../models/ltc) move too fast.
+- [Liquid Neural Nets (LNNs): a deep dive](https://medium.com/@hession520/liquid-neural-nets-lnns-32ce1bfb045a)
+  (Jake Hession, Medium) -- broader intuition-first tour of why time-continuous,
+  input-dependent dynamics behave differently from LSTM/GRU.
+- [Liquid Neural Networks](https://abdulkaderhelwan.medium.com/liquid-neural-networks-37ccaaee469a)
+  (Abdulkader Helwan, Medium) -- short, accessible overview of the "equations
+  that adapt to new inputs" framing, a good first read before the papers above.
+
 ## Also worth knowing about (not separately modeled here)
 
 - **Neural ODEs** (Chen et al., NeurIPS 2018, [arXiv:1806.07366](https://arxiv.org/abs/1806.07366))

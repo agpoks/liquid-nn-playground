@@ -27,7 +27,10 @@ templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
 html_theme = "sphinx_rtd_theme"
-html_static_path = []
+html_static_path = ["_static"]
+html_logo = "_static/logo.svg"
+html_favicon = "_static/logo.svg"
+html_theme_options = {"logo_only": True}
 
 # -- Bibliography (papers/references.bib) -----------------------------------
 bibtex_bibfiles = ["../../papers/references.bib"]
