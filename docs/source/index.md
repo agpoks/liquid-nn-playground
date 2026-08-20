@@ -15,6 +15,7 @@ training time are directly comparable.
 :caption: Contents
 
 getting_started
+model_comparison
 models/ltc
 models/cfc
 models/ncp
