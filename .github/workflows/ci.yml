@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  smoke-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install package
+        run: pip install -e .
+      - name: Import + forward/backward smoke test for every model
+        run: |
+          python -c "
+          import torch
+          from models.ltc.model import LTCModel
+          from models.cfc.model import CfCModel
+          from models.ncp.model import NCPModel
+          from models.liquid_s4.model import LiquidS4Model
+          from models.lrcssm.model import LrcSSMModel
+
+          x = torch.randn(2, 10, 3)
+          for name, model in [
+              ('LTC', LTCModel(3, 8, 2)),
+              ('CfC', CfCModel(3, 8, 2)),
+              ('NCP', NCPModel(3, 2)),
+              ('Liquid-S4', LiquidS4Model(3, 8, 2)),
+              ('LrcSSM', LrcSSMModel(3, 8, 2)),
+          ]:
+              out = model(x)
+              out.sum().backward()
+              print(name, 'OK', out.shape)
+          "
