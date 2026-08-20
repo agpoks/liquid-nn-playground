@@ -1,0 +1,18 @@
+# All 5 architectures on ETTh1 long-horizon forecasting (MSE, lower is better).
+dataset: ett
+dataset_kwargs:
+  seq_len: 96
+  pred_len: 24
+epochs: 15
+batch_size: 64
+lr: 0.001
+models:
+  ltc:
+    hidden_size: 32
+  cfc:
+    hidden_size: 32
+  ncp: {}
+  liquid_s4:
+    state_size: 32
+  lrcssm:
+    state_size: 32

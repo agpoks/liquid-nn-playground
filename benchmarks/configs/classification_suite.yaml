@@ -1,0 +1,18 @@
+# All 5 architectures on the same short-sequence binary classification task,
+# so accuracy/params/train-time are directly comparable.
+dataset: room_occupancy
+dataset_kwargs:
+  seq_len: 16
+epochs: 15
+batch_size: 32
+lr: 0.01
+models:
+  ltc:
+    hidden_size: 32
+  cfc:
+    hidden_size: 32
+  ncp: {}
+  liquid_s4:
+    state_size: 32
+  lrcssm:
+    state_size: 32
