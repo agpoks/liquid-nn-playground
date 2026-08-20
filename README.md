@@ -46,6 +46,12 @@ Every example script (and the benchmark runner) takes `--device {auto,cpu,cuda,m
 CPU -- so the same command works unchanged on a laptop or a GPU box. Every
 model also has a matching `example.ipynb` you can open in Jupyter.
 
+CfC also ships a **JAX/Flax** port (`models/cfc/model_jax.py` +
+`example_jax.py`, `pip install -e ".[jax]"`) with JAX's own
+`--device {auto,cpu,gpu,tpu}` selection, alongside the PyTorch version -- a
+quick way to compare the two frameworks on the identical architecture without
+re-implementing all five models twice.
+
 ## Compare all 5 models
 
 ```bash

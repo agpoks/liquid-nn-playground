@@ -19,9 +19,14 @@ train/run than LTC-style networks at comparable accuracy.
 
 ## Files
 
-- `model.py` -- `CfCCell` (closed-form gated update) + `CfCModel`.
+- `model.py` -- `CfCCell` (closed-form gated update) + `CfCModel`. **PyTorch.**
 - `example.py` -- trains on UCI Person Activity (`--device {auto,cpu,cuda,mps}`).
 - `example.ipynb` -- same walkthrough with loss/accuracy plots.
+- `model_jax.py` / `example_jax.py` -- the identical architecture and task,
+  ported to **JAX/Flax**, with JAX's own `--device {auto,cpu,gpu,tpu}`
+  selection. CfC is the one model with a JAX port in this repo (see
+  [the repo README](../../README.md) for why just this one) -- useful if you
+  want to compare PyTorch vs. JAX training speed/ergonomics on the same model.
 
 ## Run it
 
@@ -29,4 +34,8 @@ train/run than LTC-style networks at comparable accuracy.
 pip install -e .
 python models/cfc/example.py --device auto
 # or open models/cfc/example.ipynb
+
+# JAX version:
+pip install -e ".[jax]"
+python models/cfc/example_jax.py --device auto
 ```
