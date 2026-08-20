@@ -26,6 +26,26 @@ The TU Wien institutional record above is metadata-only (no attached PDF at
 time of writing) -- use your institutional access (e.g. via TU Wien) or Nature
 MI directly.
 
+## Coverage check
+
+The five papers above are the complete core lineage of this specific liquid-network
+family (LTC &rarr; CfC &rarr; NCP wiring &rarr; Liquid-S4 &rarr; LrcSSM), all from
+the same Hasani/Lechner/Rus/Grosu research line, confirmed against recent
+(2025-2026) survey/comparison papers -- there is no missing "6th" architecture
+paper in this lineage as of this writing. LrcSSM (May 2025, NeurIPS 2025) is
+the newest and currently the last entry in the chain.
+
+Two adjacent things you'll see referenced alongside this lineage but that
+aren't separate architectures modeled here:
+
+- **Liquid AI's LFM2 / "Liquid Nanos"** -- the company co-founded by these
+  authors' production on-device foundation models (2025). Related in lineage
+  and branding, but a different, larger-scale model family with its own
+  (largely proprietary) architecture details, not just LTC/CfC at scale.
+- Comparative/survey papers such as *"Comparative Analysis of Liquid Neural
+  Networks and LSTM..."* ([arXiv:2605.27467](https://arxiv.org/abs/2605.27467))
+  benchmark the architectures above rather than introducing new ones.
+
 ## Also worth knowing about (not separately modeled here)
 
 - **Neural ODEs** (Chen et al., NeurIPS 2018, [arXiv:1806.07366](https://arxiv.org/abs/1806.07366))
