@@ -19,6 +19,7 @@ model_comparison
 models/rnn
 models/ctrnn
 models/node
+models/liquid_lstm
 models/ltc
 models/cfc
 models/ncp

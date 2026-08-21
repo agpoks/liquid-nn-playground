@@ -1,6 +1,6 @@
-# All 5 liquid architectures plus 3 non-liquid baselines (RNN, CT-RNN,
-# Neural ODE) on the same short-sequence binary classification task,
-# so accuracy/params/train-time are directly comparable.
+# All 5 liquid architectures plus 4 non-liquid/hybrid baselines (RNN,
+# CT-RNN, Neural ODE, Liquid-LSTM) on the same short-sequence binary
+# classification task, so accuracy/params/train-time are directly comparable.
 dataset: room_occupancy
 dataset_kwargs:
   seq_len: 16
@@ -13,6 +13,8 @@ models:
   ctrnn:
     hidden_size: 32
   node:
+    hidden_size: 32
+  liquid_lstm:
     hidden_size: 32
   ltc:
     hidden_size: 32

@@ -63,6 +63,21 @@ directly comparable.
 | [CT-RNN](../models/ctrnn) | Approximation of dynamical systems by continuous time recurrent neural networks | Neural Networks 1993 | [DOI](https://doi.org/10.1016/S0893-6080(05)80125-X) | Continuous-time ODE, but the leak's time constant is fixed, never input-dependent |
 | [Neural ODE](../models/node) | Neural Ordinary Differential Equations | NeurIPS 2018 | [arXiv:1806.07366](https://arxiv.org/abs/1806.07366) | Fully general learned `dh/dt = f_theta(h, x)`, no structure or stability guarantee -- LTC is a specific, bounded case of this |
 
+## Liquid-LSTM: a hybrid built for this repo (not from a paper)
+
+There is no published "Liquid-LSTM" or "Liquid Transformer" architecture --
+checked specifically for both (see the section below) and found neither
+exists in this lineage or elsewhere as a peer-reviewed architecture.
+[`models/liquid_lstm`](../models/liquid_lstm) is a hybrid designed
+specifically for this repo instead: it keeps LSTM's four gates (Hochreiter &
+Schmidhuber, *Long Short-Term Memory*, Neural Computation, 1997 --
+forget/input/candidate/output, richer read/write/erase control than LTC's
+single synapse) but replaces LSTM's discrete cell-state update with LTC's
+continuous-time ODE, using the forget gate to build an input-dependent
+effective time constant the same way LTC's synapse does. Same file layout,
+`--device` flag, and UCI Ozone task as the baselines above, so it's directly
+comparable to all of them -- see its doc page for the full derivation.
+
 ## Liquid NNs in the wild -- further reading
 
 Papers above are the primary sources; these are more accessible write-ups and

@@ -2,14 +2,16 @@
 
 ## The baseline ladder
 
-Three non-liquid models live alongside the five below specifically to
-isolate, one at a time, what each piece of machinery actually buys:
+Three non-liquid models, plus one hybrid, live alongside the five below
+specifically to isolate, one at a time, what each piece of machinery
+actually buys:
 
 | Model | Time is... | Time constant | "Liquid"? |
 |---|---|---|---|
 | [RNN](models/rnn) | not modeled at all -- discrete steps only | none | no |
 | [CT-RNN](models/ctrnn) | continuous (an ODE) | fixed, input-independent | no |
 | [Neural ODE](models/node) | continuous (an ODE) | none -- fully general learned `dh/dt` | no (unconstrained, not input-*gated*) |
+| [Liquid-LSTM](models/liquid_lstm) | continuous (an ODE), but with LSTM's 4-gate read/write/erase control | input-dependent (`1/tau + (1-f_t)`) | yes -- a hybrid, not from a paper (see its page) |
 | [LTC](models/ltc) | continuous (an ODE) | input-dependent (`1/(1/tau + f(x,I))`) | **yes -- this is where "liquid" starts** |
 
 Reading down the table: RNN has no time axis at all. CT-RNN adds a genuine
@@ -18,7 +20,11 @@ removes the fixed structure entirely, trading it for an arbitrary learned
 vector field with no stability guarantee. LTC sits at neither extreme: an
 ODE with a *specific*, provably-bounded structure whose effective time
 constant is itself a function of the input -- the exact property that gives
-the whole family its name. All three baselines share the same file layout,
+the whole family its name. Liquid-LSTM is a deliberate detour off this
+ladder rather than a rung on it: it grafts LTC's liquid leak onto LSTM's
+richer 4-gate cell instead of LTC's single synapse, built for this repo
+after checking that no such architecture exists in the literature (see
+`papers/README.md`). All four baselines/hybrids share the same file layout,
 the same `--device` flag, and the same UCI Ozone task in `example.py` as
 {doc}`models/ltc`, so they're directly comparable -- see
 {doc}`benchmarks` to run them all together.

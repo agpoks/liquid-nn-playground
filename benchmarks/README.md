@@ -1,10 +1,11 @@
 # Benchmarks
 
-Runs all eight models -- the five liquid architectures (LTC, CfC, NCP,
-Liquid-S4, LrcSSM) plus three non-liquid baselines (RNN, CT-RNN, Neural ODE,
-see `docs/model_comparison.md` for why they're included) -- on the *same*
-dataset with the same train/eval loop, so accuracy/MSE, parameter count, and
-wall-clock train time are directly comparable.
+Runs all nine models -- the five liquid architectures (LTC, CfC, NCP,
+Liquid-S4, LrcSSM), three non-liquid baselines (RNN, CT-RNN, Neural ODE),
+and one hybrid (Liquid-LSTM -- see `docs/model_comparison.md` for why each
+is included) -- on the *same* dataset with the same train/eval loop, so
+accuracy/MSE, parameter count, and wall-clock train time are directly
+comparable.
 
 ```bash
 python benchmarks/run_all.py --config benchmarks/configs/classification_suite.yaml --device auto

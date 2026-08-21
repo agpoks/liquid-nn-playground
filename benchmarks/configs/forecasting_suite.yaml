@@ -1,5 +1,6 @@
-# All 5 liquid architectures plus 3 non-liquid baselines (RNN, CT-RNN,
-# Neural ODE) on ETTh1 long-horizon forecasting (MSE, lower is better).
+# All 5 liquid architectures plus 4 non-liquid/hybrid baselines (RNN,
+# CT-RNN, Neural ODE, Liquid-LSTM) on ETTh1 long-horizon forecasting
+# (MSE, lower is better).
 dataset: ett
 dataset_kwargs:
   seq_len: 96
@@ -13,6 +14,8 @@ models:
   ctrnn:
     hidden_size: 32
   node:
+    hidden_size: 32
+  liquid_lstm:
     hidden_size: 32
   ltc:
     hidden_size: 32

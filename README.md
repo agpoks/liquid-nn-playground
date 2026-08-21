@@ -7,7 +7,7 @@
 A playground for **liquid neural networks**: implement, run, and benchmark
 five liquid/liquid-adjacent architectures side by side on the same datasets,
 with a Python example *and* a notebook example for each, plus three
-non-liquid baselines that isolate exactly what "liquid" adds.
+non-liquid baselines and one hybrid that isolate exactly what "liquid" adds.
 
 | Model | Paper | Folder |
 |---|---|---|
@@ -24,6 +24,12 @@ non-liquid baselines that isolate exactly what "liquid" adds.
 | **RNN** -- vanilla Elman RNN, no time-awareness at all | Elman, Cognitive Science 1990 | [`models/rnn`](models/rnn) |
 | **CT-RNN** -- continuous time, but a fixed (non-liquid) time constant | Funahashi & Nakamura, Neural Networks 1993 | [`models/ctrnn`](models/ctrnn) |
 | **Neural ODE** -- continuous time, fully general learned dynamics | Chen et al., NeurIPS 2018 | [`models/node`](models/node) |
+
+**Hybrid** (liquid, but not from a paper -- built for this repo after confirming no such architecture exists in the literature):
+
+| Model | Built from | Folder |
+|---|---|---|
+| **Liquid-LSTM** -- LSTM's 4 gates + LTC's continuous-time leak | Hochreiter & Schmidhuber 1997 + Hasani et al. 2021 | [`models/liquid_lstm`](models/liquid_lstm) |
 
 Full paper references and why each one was picked: [`papers/README.md`](papers/README.md).
 Docs: see [`docs/`](docs) (built on Read the Docs).
@@ -70,7 +76,7 @@ trains both back to back and prints step time + accuracy side by side:
 python benchmarks/jax_vs_pytorch_cfc.py --device auto --epochs 15
 ```
 
-## Compare all 8 models
+## Compare all 9 models
 
 ```bash
 python benchmarks/run_all.py --config benchmarks/configs/classification_suite.yaml --device auto

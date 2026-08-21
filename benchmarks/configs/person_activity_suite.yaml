@@ -1,6 +1,6 @@
-# All 5 liquid architectures plus 3 non-liquid baselines (RNN, CT-RNN,
-# Neural ODE) on the 11-way UCI Person Activity task (the exact dataset used
-# in the CfC/NCP papers).
+# All 5 liquid architectures plus 4 non-liquid/hybrid baselines (RNN,
+# CT-RNN, Neural ODE, Liquid-LSTM) on the 11-way UCI Person Activity task
+# (the exact dataset used in the CfC/NCP papers).
 dataset: person_activity
 dataset_kwargs:
   seq_len: 25
@@ -13,6 +13,8 @@ models:
   ctrnn:
     hidden_size: 48
   node:
+    hidden_size: 48
+  liquid_lstm:
     hidden_size: 48
   ltc:
     hidden_size: 48
