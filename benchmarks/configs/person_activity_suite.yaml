@@ -12,6 +12,8 @@ models:
     hidden_size: 48
   ctrnn:
     hidden_size: 48
+  ctgru:
+    hidden_size: 48
   node:
     hidden_size: 48
   liquid_lstm:

@@ -10,23 +10,27 @@ actually buys:
 |---|---|---|---|
 | [RNN](models/rnn) | not modeled at all -- discrete steps only | none | no |
 | [CT-RNN](models/ctrnn) | continuous (an ODE) | fixed, input-independent | no |
+| [CT-GRU](models/ctgru) | continuous (exact exponential decay, no solver) | a *bank* of fixed scales, gated per-step | no (gated selection among fixed scales, not one input-dependent scale) |
 | [Neural ODE](models/node) | continuous (an ODE) | none -- fully general learned `dh/dt` | no (unconstrained, not input-*gated*) |
 | [Liquid-LSTM](models/liquid_lstm) | continuous (an ODE), but with LSTM's 4-gate read/write/erase control | input-dependent (`1/tau + (1-f_t)`) | yes -- a hybrid, not from a paper (see its page) |
 | [LTC](models/ltc) | continuous (an ODE) | input-dependent (`1/(1/tau + f(x,I))`) | **yes -- this is where "liquid" starts** |
 
 Reading down the table: RNN has no time axis at all. CT-RNN adds a genuine
-ODE, but with a fixed leak rate -- "continuous" without "liquid". Neural ODE
-removes the fixed structure entirely, trading it for an arbitrary learned
-vector field with no stability guarantee. LTC sits at neither extreme: an
-ODE with a *specific*, provably-bounded structure whose effective time
-constant is itself a function of the input -- the exact property that gives
-the whole family its name. Liquid-LSTM is a deliberate detour off this
-ladder rather than a rung on it: it grafts LTC's liquid leak onto LSTM's
-richer 4-gate cell instead of LTC's single synapse, built for this repo
-after checking that no such architecture exists in the literature (see
-`papers/README.md`). All four baselines/hybrids share the same file layout,
-the same `--device` flag, and the same UCI Ozone task in `example.py` as
-{doc}`models/ltc`, so they're directly comparable -- see
+ODE, but with a fixed leak rate -- "continuous" without "liquid". CT-GRU
+swaps one fixed time constant for a *bank* of them plus a learned gate that
+picks among the fixed options at every step -- richer than CT-RNN, but the
+options themselves still aren't input-dependent the way LTC's synapse
+$f(x,I)$ is. Neural ODE removes the fixed structure entirely, trading it for
+an arbitrary learned vector field with no stability guarantee. LTC sits at
+neither extreme: an ODE with a *specific*, provably-bounded structure whose
+effective time constant is itself a function of the input -- the exact
+property that gives the whole family its name. Liquid-LSTM is a deliberate
+detour off this ladder rather than a rung on it: it grafts LTC's liquid leak
+onto LSTM's richer 4-gate cell instead of LTC's single synapse, built for
+this repo after checking that no such architecture exists in the literature
+(see `papers/README.md`). All five baselines/hybrids share the same file
+layout, the same `--device` flag, and the same UCI Ozone task in
+`example.py` as {doc}`models/ltc`, so they're directly comparable -- see
 {doc}`benchmarks` to run them all together.
 
 ## The five liquid models

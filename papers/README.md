@@ -48,11 +48,12 @@ aren't separate architectures modeled here:
 
 ## Baseline architectures (for comparison, not liquid networks)
 
-Three non-liquid baselines live alongside the five liquid models specifically
+Four non-liquid baselines live alongside the five liquid models specifically
 to show what each additional piece of machinery buys, one step at a time:
-plain discrete-time recurrence -> fixed continuous time -> fully general
-learned continuous-time dynamics -> LTC's *input-gated, structured* ODE
-(where "liquid" starts). Same file layout as the liquid models
+plain discrete-time recurrence -> fixed continuous time -> a bank of fixed
+time constants with learned gating -> fully general learned continuous-time
+dynamics -> LTC's *input-gated, structured* ODE (where "liquid" starts).
+Same file layout as the liquid models
 (`model.py` / `example.py` / `example.ipynb` / `README.md`), same UCI Ozone
 task in every `example.py` as [`models/ltc`](../models/ltc) so results are
 directly comparable.
@@ -61,6 +62,7 @@ directly comparable.
 |---|---|---|---|---|
 | [RNN](../models/rnn) | Finding Structure in Time | Cognitive Science 1990 | classic reference, no arXiv/DOI-linkable preprint | No time-awareness at all -- discrete step, no `dt`, no time constant |
 | [CT-RNN](../models/ctrnn) | Approximation of dynamical systems by continuous time recurrent neural networks | Neural Networks 1993 | [DOI](https://doi.org/10.1016/S0893-6080(05)80125-X) | Continuous-time ODE, but the leak's time constant is fixed, never input-dependent |
+| [CT-GRU](../models/ctgru) | Discrete Event, Continuous Time RNNs | 2017 | [arXiv:1710.04110](https://arxiv.org/abs/1710.04110) | A *bank* of fixed, log-spaced time constants with learned soft read/write selection, instead of one (CT-RNN) or an input-gated one (LTC) |
 | [Neural ODE](../models/node) | Neural Ordinary Differential Equations | NeurIPS 2018 | [arXiv:1806.07366](https://arxiv.org/abs/1806.07366) | Fully general learned `dh/dt = f_theta(h, x)`, no structure or stability guarantee -- LTC is a specific, bounded case of this |
 
 ## Liquid-LSTM: a hybrid built for this repo (not from a paper)

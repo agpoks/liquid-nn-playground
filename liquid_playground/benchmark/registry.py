@@ -28,6 +28,7 @@ def _load_model_module(name: str):
 
 RNNModel = _load_model_module("rnn").RNNModel
 CTRNNModel = _load_model_module("ctrnn").CTRNNModel
+CTGRUModel = _load_model_module("ctgru").CTGRUModel
 NeuralODEModel = _load_model_module("node").NeuralODEModel
 LiquidLSTMModel = _load_model_module("liquid_lstm").LiquidLSTMModel
 LTCModel = _load_model_module("ltc").LTCModel
@@ -51,6 +52,10 @@ def _rnn_factory(input_size, output_size, hidden_size=32, **_):
 
 def _ctrnn_factory(input_size, output_size, hidden_size=32, **_):
     return CTRNNModel(input_size, hidden_size, output_size)
+
+
+def _ctgru_factory(input_size, output_size, hidden_size=32, **_):
+    return CTGRUModel(input_size, hidden_size, output_size)
 
 
 def _node_factory(input_size, output_size, hidden_size=32, **_):
@@ -84,6 +89,7 @@ def _lrcssm_factory(input_size, output_size, state_size=32, n_layers=2, **_):
 MODEL_REGISTRY: dict[str, Callable] = {
     "rnn": _rnn_factory,
     "ctrnn": _ctrnn_factory,
+    "ctgru": _ctgru_factory,
     "node": _node_factory,
     "liquid_lstm": _liquid_lstm_factory,
     "ltc": _ltc_factory,

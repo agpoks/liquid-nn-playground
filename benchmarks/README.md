@@ -1,9 +1,9 @@
 # Benchmarks
 
-Runs all nine models -- the five liquid architectures (LTC, CfC, NCP,
-Liquid-S4, LrcSSM), three non-liquid baselines (RNN, CT-RNN, Neural ODE),
-and one hybrid (Liquid-LSTM -- see `docs/model_comparison.md` for why each
-is included) -- on the *same* dataset with the same train/eval loop, so
+Runs all ten models -- the five liquid architectures (LTC, CfC, NCP,
+Liquid-S4, LrcSSM), four non-liquid baselines (RNN, CT-RNN, CT-GRU, Neural
+ODE), and one hybrid (Liquid-LSTM -- see `docs/model_comparison.md` for why
+each is included) -- on the *same* dataset with the same train/eval loop, so
 accuracy/MSE, parameter count, and wall-clock train time are directly
 comparable.
 

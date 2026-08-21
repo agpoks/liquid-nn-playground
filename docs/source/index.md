@@ -18,6 +18,7 @@ getting_started
 model_comparison
 models/rnn
 models/ctrnn
+models/ctgru
 models/node
 models/liquid_lstm
 models/ltc
