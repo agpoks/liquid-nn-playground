@@ -64,6 +64,42 @@ positive (a free/negative time constant would make the neuron divergent).
 final hidden state -- see {doc}`../model_comparison` for how this compares to
 the other four models' notion of time.
 
+Every `Linear` box below is exactly the affine map described in
+{doc}`../getting_started` -- the parts actually specific to LTC are the
+sigmoid gate and the semi-implicit Euler solve on the right:
+
+```{eval-rst}
+.. plot::
+
+    from liquid_playground.utils.diagrams import new_ax, box, arrow, INPUT, LINEAR, NONLIN, STATE, OTHER
+
+    fig, ax = new_ax(figsize=(9.0, 4.8), xlim=(0, 15), ylim=(0, 9))
+
+    box(ax, 1.0, 6.5, 1.5, 1.0, "x_t", INPUT)
+    box(ax, 1.0, 2.5, 1.7, 1.0, "h_prev", STATE)
+    box(ax, 3.6, 6.5, 1.8, 1.0, "Linear\nw_in", LINEAR)
+    box(ax, 3.6, 2.5, 1.8, 1.0, "Linear\nw_rec", LINEAR)
+    box(ax, 6.2, 4.5, 1.6, 1.0, "+ bias", OTHER)
+    box(ax, 8.6, 4.5, 1.9, 1.0, "sigmoid\nf (gate)", NONLIN)
+    box(ax, 11.8, 4.5, 2.3, 2.2, "semi-implicit\nEuler step\n(x6 sub-steps)", STATE)
+    box(ax, 11.8, 7.9, 1.4, 0.9, "h_t", STATE)
+
+    arrow(ax, (1.75, 6.5), (2.7, 6.5))
+    arrow(ax, (1.85, 2.5), (2.7, 2.5))
+    arrow(ax, (4.5, 6.5), (5.6, 4.85))
+    arrow(ax, (4.5, 2.5), (5.6, 4.15))
+    arrow(ax, (7.0, 4.5), (7.65, 4.5))
+    arrow(ax, (9.55, 4.5), (10.65, 4.5))
+    ax.text(10.1, 4.85, "τ, A", fontsize=8, ha="center", color="#334155")
+    arrow(ax, (11.8, 5.6), (11.8, 7.45))
+    arrow(ax, (12.5, 8.3), (12.5, 7.6), curve=1.1, dashed=True)
+    ax.text(13.55, 7.95, "t+1", fontsize=8, ha="center", color="#334155")
+    arrow(ax, (12.5, 7.55), (13.7, 7.55))
+    ax.text(13.85, 7.55, "readout\n(Linear) → y", fontsize=8, va="center", color="#334155")
+
+    ax.set_title("LTC cell: one input step", fontsize=11)
+```
+
 ## The solver in action
 
 The plot below runs the exact update above (same equations, same

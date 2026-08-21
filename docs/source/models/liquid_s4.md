@@ -60,6 +60,45 @@ easy-to-read sequential loop and trades the FFT-convolution speed for
 clarity; see {doc}`lrcssm` for a model in this repo that *does* ship a fast
 parallel path.
 
+```{eval-rst}
+.. plot::
+
+    from liquid_playground.utils.diagrams import new_ax, box, arrow, INPUT, LINEAR, NONLIN, STATE, OTHER
+
+    fig, ax = new_ax(figsize=(10.5, 5.4), xlim=(0, 16), ylim=(0, 9.5))
+
+    box(ax, 1.0, 6.0, 1.5, 1.0, "u_t", INPUT)
+    box(ax, 1.0, 2.3, 1.7, 1.0, "x_prev", STATE)
+    box(ax, 3.9, 8.0, 2.0, 1.0, "Linear\nliquid_gate", LINEAR)
+    box(ax, 6.6, 8.0, 1.6, 1.0, "sigmoid", NONLIN)
+    box(ax, 9.1, 8.0, 2.1, 1.0, "× exp(a_base)\n= a_eff", OTHER)
+    box(ax, 3.9, 4.0, 1.9, 1.0, "Linear B\n(no bias)", LINEAR)
+    box(ax, 9.1, 4.6, 2.3, 1.7, "a_eff·x_prev\n+ B(u_t)", OTHER)
+    box(ax, 12.1, 4.6, 1.3, 0.9, "x_t", STATE)
+    box(ax, 12.1, 8.0, 1.9, 1.0, "Linear C\n(no bias)", LINEAR)
+    box(ax, 14.6, 6.8, 2.1, 1.4, "+ D·u_t\n(skip)\n= y_t", OTHER)
+
+    arrow(ax, (1.75, 6.35), (2.9, 7.7))
+    arrow(ax, (1.75, 5.65), (2.95, 4.3))
+    arrow(ax, (4.9, 8.0), (5.8, 8.0))
+    arrow(ax, (7.4, 8.0), (8.05, 8.0))
+    arrow(ax, (9.1, 7.5), (9.1, 5.45))
+    arrow(ax, (4.85, 4.0), (7.95, 4.45))
+    arrow(ax, (1.85, 2.3), (7.95, 3.95))
+    arrow(ax, (10.25, 4.6), (11.45, 4.6))
+    arrow(ax, (12.1, 5.05), (12.1, 7.5))
+    arrow(ax, (13.05, 8.0), (13.55, 7.35))
+    arrow(ax, (12.75, 5.0), (12.75, 4.35), curve=1.1, dashed=True)
+    ax.text(13.75, 4.7, "next t", fontsize=8, ha="center", color="#334155")
+
+    ax.text(9.1, 1.3,
+            "one LiquidS4Layer repeats this for every t in the sequence\n"
+            "(a Python for-loop -- see the multi-timescale decay plot below)",
+            fontsize=8.5, ha="center", color="#475569", style="italic")
+
+    ax.set_title("Liquid-S4: one diagonal SSM step", fontsize=11)
+```
+
 ## Multi-timescale memory, visualized
 
 The base decay rates `a_base` are spread on a log scale specifically so

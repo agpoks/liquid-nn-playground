@@ -50,6 +50,50 @@ loop over sub-steps like {doc}`ltc`), `CfCModel.forward` calls the cell
 exactly once per input step. See {doc}`../model_comparison` for the
 side-by-side gate-shape plot.
 
+Every `Linear`/`Linear+Tanh` box below is the affine map from
+{doc}`../getting_started` (with an activation folded on where noted) -- the
+part specific to CfC is the mix on the right, computed once, with no ODE
+unroll at all:
+
+```{eval-rst}
+.. plot::
+
+    from liquid_playground.utils.diagrams import new_ax, box, arrow, INPUT, LINEAR, NONLIN, STATE, OTHER
+
+    fig, ax = new_ax(figsize=(10.5, 5.2), xlim=(0, 17), ylim=(0, 9))
+
+    box(ax, 1.0, 7.0, 1.5, 1.0, "x_t", INPUT)
+    box(ax, 1.0, 2.0, 1.7, 1.0, "h_prev", STATE)
+    box(ax, 3.5, 4.5, 1.7, 1.0, "concat", OTHER)
+    box(ax, 6.1, 4.5, 2.1, 1.0, "Linear+Tanh\n(backbone)", LINEAR)
+    box(ax, 8.9, 7.3, 1.9, 1.0, "Linear\nf_head → f", LINEAR)
+    box(ax, 8.9, 4.5, 1.9, 1.0, "Linear+Tanh\ng_head → g", LINEAR)
+    box(ax, 8.9, 1.7, 1.9, 1.0, "Linear+Tanh\nh_head → h_proj", LINEAR)
+    box(ax, 11.7, 7.3, 2.1, 1.0, "sigmoid gate\nσ(-f·scale·dt)", NONLIN)
+    box(ax, 11.9, 4.0, 2.3, 1.5, "gate·h_proj +\n(1-gate)·g", OTHER)
+    box(ax, 14.6, 4.7, 1.3, 0.9, "h_t", STATE)
+
+    arrow(ax, (1.75, 7.0), (2.7, 4.85))
+    arrow(ax, (1.85, 2.0), (2.7, 4.15))
+    arrow(ax, (4.35, 4.5), (5.05, 4.5))
+    arrow(ax, (7.15, 4.5), (7.95, 6.95))
+    arrow(ax, (7.15, 4.5), (7.95, 4.5))
+    arrow(ax, (7.15, 4.5), (7.95, 2.05))
+    arrow(ax, (9.85, 7.3), (10.65, 7.3))
+    arrow(ax, (11.7, 6.8), (11.85, 4.75))
+    arrow(ax, (9.85, 1.9), (10.75, 3.55))
+    ax.text(10.5, 2.35, "h_proj", fontsize=8, color="#334155")
+    arrow(ax, (9.85, 4.35), (10.75, 4.15))
+    ax.text(10.5, 4.75, "g", fontsize=8, color="#334155")
+    arrow(ax, (13.05, 4.3), (13.95, 4.6))
+    arrow(ax, (15.3, 5.1), (15.3, 4.4), curve=1.1, dashed=True)
+    ax.text(16.3, 4.75, "t+1", fontsize=8, ha="center", color="#334155")
+    arrow(ax, (15.3, 4.35), (16.5, 3.6))
+    ax.text(16.55, 3.35, "readout\n(Linear) → y", fontsize=8, va="center", color="#334155")
+
+    ax.set_title("CfC cell: one input step (no ODE unroll)", fontsize=11)
+```
+
 ## Try it
 
 ```bash

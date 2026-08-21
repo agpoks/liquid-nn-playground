@@ -50,6 +50,40 @@ output from the **motor** neurons only (`h[:, self.wiring._motor]`), the
 same way the biological wiring diagram routes only motor-neuron activity to
 actuators.
 
+Zoomed out, ignoring the per-neuron LTC math (see {doc}`ltc` for that), the
+four-layer wiring itself looks like this:
+
+```{eval-rst}
+.. plot::
+
+    from liquid_playground.utils.diagrams import new_ax, box, arrow, INPUT, STATE
+
+    fig, ax = new_ax(figsize=(9.5, 4.4), xlim=(0, 15), ylim=(0, 7.5))
+
+    box(ax, 1.2, 4.2, 1.8, 1.3, "sensory\n(input)", INPUT)
+    box(ax, 4.4, 4.2, 1.8, 1.3, "inter\n16 units", STATE)
+    box(ax, 7.9, 4.2, 2.0, 1.6, "command\n12 units", STATE)
+    box(ax, 11.4, 4.2, 1.8, 1.3, "motor\n8 units", STATE)
+
+    arrow(ax, (2.1, 4.2), (3.5, 4.2))
+    ax.text(2.8, 4.75, "sparse\nfanout=4", fontsize=7.5, ha="center", color="#334155")
+    arrow(ax, (5.3, 4.2), (6.9, 4.2))
+    ax.text(6.1, 4.75, "sparse\nfanout=4", fontsize=7.5, ha="center", color="#334155")
+    arrow(ax, (8.9, 4.2), (10.5, 4.2))
+    ax.text(9.7, 4.75, "sparse\nfanin=6", fontsize=7.5, ha="center", color="#334155")
+    arrow(ax, (7.4, 5.2), (8.4, 5.2), curve=-1.3, dashed=True)
+    ax.text(7.9, 6.15, "sparse recurrent\nfanout=4", fontsize=7.5, ha="center", color="#334155")
+    arrow(ax, (12.3, 4.2), (13.3, 4.2))
+    ax.text(13.4, 4.2, "readout\n(Linear) → y", fontsize=8, va="center", color="#334155")
+
+    ax.text(7.5, 1.6,
+            "every unit above still runs the same LTC ODE from the LTC page --\n"
+            "only the connectivity is masked to these sparse, one-way arrows",
+            fontsize=8.5, ha="center", color="#475569", style="italic")
+
+    ax.set_title("NCP wiring: sensory → inter → command → motor", fontsize=11)
+```
+
 ## What the sparsity looks like
 
 Each cell of the heatmap below is one *possible* recurrent connection

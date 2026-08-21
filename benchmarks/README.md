@@ -1,7 +1,9 @@
 # Benchmarks
 
-Runs all five models (LTC, CfC, NCP, Liquid-S4, LrcSSM) on the *same* dataset
-with the same train/eval loop, so accuracy/MSE, parameter count, and
+Runs all eight models -- the five liquid architectures (LTC, CfC, NCP,
+Liquid-S4, LrcSSM) plus three non-liquid baselines (RNN, CT-RNN, Neural ODE,
+see `docs/model_comparison.md` for why they're included) -- on the *same*
+dataset with the same train/eval loop, so accuracy/MSE, parameter count, and
 wall-clock train time are directly comparable.
 
 ```bash
@@ -12,6 +14,22 @@ python benchmarks/run_all.py --config benchmarks/configs/person_activity_suite.y
 
 Each run prints a comparison table and writes a CSV to `benchmarks/results/`
 (gitignored -- results are meant to be regenerated on your own hardware).
+
+## JAX vs. PyTorch (CfC only)
+
+CfC is the one model with a JAX/Flax port (`models/cfc/model_jax.py`) as
+well as the usual PyTorch one. `jax_vs_pytorch_cfc.py` trains the identical
+architecture in both frameworks on the same UCI Person Activity task and
+prints wall-clock time per training step and final accuracy side by side:
+
+```bash
+python benchmarks/jax_vs_pytorch_cfc.py --device auto --epochs 15
+```
+
+Not a rigorous perf study -- no steady-state-only timing, no multiple seeds
+-- just a quick, honest "same model, two frameworks, this machine" sanity
+check. `first_step_s` is dominated by JAX's one-time JIT/trace compile cost,
+which `avg_step_s` will also reflect if `--epochs` is small.
 
 ## Suites
 

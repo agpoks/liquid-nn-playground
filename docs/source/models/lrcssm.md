@@ -61,6 +61,44 @@ python models/lrcssm/example.py --device auto
 # prints: "sequential vs. parallel-scan max abs diff: 1.19e-07"
 ```
 
+```{eval-rst}
+.. plot::
+
+    from liquid_playground.utils.diagrams import new_ax, box, arrow, INPUT, LINEAR, NONLIN, STATE, OTHER
+
+    fig, ax = new_ax(figsize=(11.0, 5.2), xlim=(0, 19), ylim=(0, 9.8))
+
+    box(ax, 1.0, 6.0, 1.6, 1.0, "u\n(B,T,D)", INPUT)
+    box(ax, 3.7, 8.2, 1.9, 1.0, "Linear\ng_head", LINEAR)
+    box(ax, 6.3, 8.2, 2.1, 1.0, "sigmoid → g\n(conductance)", NONLIN)
+    box(ax, 3.7, 3.8, 1.9, 1.0, "Linear\nc_head", LINEAR)
+    box(ax, 6.3, 3.8, 2.1, 1.0, "tanh → c\n(candidate)", NONLIN)
+    box(ax, 9.2, 6.0, 1.9, 1.5, "a = 1-g\nb = g·c", OTHER)
+    box(ax, 12.2, 6.0, 2.7, 2.1, "parallel scan\n(Hillis-Steele)\nO(log T) depth", STATE)
+    box(ax, 15.4, 6.0, 1.3, 0.9, "x", STATE)
+    box(ax, 15.4, 8.7, 1.9, 1.0, "Linear C\n(no bias)", LINEAR)
+    box(ax, 17.9, 7.7, 2.0, 1.4, "+ D·u\n(skip)\n= y", OTHER)
+
+    arrow(ax, (1.8, 6.35), (2.75, 7.9))
+    arrow(ax, (1.8, 5.65), (2.75, 4.1))
+    arrow(ax, (4.65, 8.2), (5.25, 8.2))
+    arrow(ax, (4.65, 3.8), (5.25, 3.8))
+    arrow(ax, (7.35, 8.2), (8.3, 6.55))
+    arrow(ax, (7.35, 3.8), (8.3, 5.45))
+    arrow(ax, (10.15, 6.0), (10.85, 6.0))
+    arrow(ax, (13.55, 6.0), (14.75, 6.0))
+    arrow(ax, (15.4, 6.45), (15.4, 8.2))
+    arrow(ax, (16.35, 8.7), (16.9, 8.0))
+
+    ax.text(12.2, 3.2,
+            "the sequential loop (parallel=False) computes the identical\n"
+            "recursion x_k = a_k·x_{k-1} + b_k one step at a time --\n"
+            "example.py checks the two paths agree to ~1e-7",
+            fontsize=8.5, ha="center", color="#475569", style="italic")
+
+    ax.set_title("LrcSSM: whole sequence solved in one call", fontsize=11)
+```
+
 ## How the two solve paths compare
 
 The scan trades sequential *depth* for more total work (it's not

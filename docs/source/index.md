@@ -16,6 +16,9 @@ training time are directly comparable.
 
 getting_started
 model_comparison
+models/rnn
+models/ctrnn
+models/node
 models/ltc
 models/cfc
 models/ncp

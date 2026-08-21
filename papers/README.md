@@ -46,6 +46,23 @@ aren't separate architectures modeled here:
   Networks and LSTM..."* ([arXiv:2605.27467](https://arxiv.org/abs/2605.27467))
   benchmark the architectures above rather than introducing new ones.
 
+## Baseline architectures (for comparison, not liquid networks)
+
+Three non-liquid baselines live alongside the five liquid models specifically
+to show what each additional piece of machinery buys, one step at a time:
+plain discrete-time recurrence -> fixed continuous time -> fully general
+learned continuous-time dynamics -> LTC's *input-gated, structured* ODE
+(where "liquid" starts). Same file layout as the liquid models
+(`model.py` / `example.py` / `example.ipynb` / `README.md`), same UCI Ozone
+task in every `example.py` as [`models/ltc`](../models/ltc) so results are
+directly comparable.
+
+| Model | Paper | Year | Link | What it adds / lacks vs. LTC |
+|---|---|---|---|---|
+| [RNN](../models/rnn) | Finding Structure in Time | Cognitive Science 1990 | classic reference, no arXiv/DOI-linkable preprint | No time-awareness at all -- discrete step, no `dt`, no time constant |
+| [CT-RNN](../models/ctrnn) | Approximation of dynamical systems by continuous time recurrent neural networks | Neural Networks 1993 | [DOI](https://doi.org/10.1016/S0893-6080(05)80125-X) | Continuous-time ODE, but the leak's time constant is fixed, never input-dependent |
+| [Neural ODE](../models/node) | Neural Ordinary Differential Equations | NeurIPS 2018 | [arXiv:1806.07366](https://arxiv.org/abs/1806.07366) | Fully general learned `dh/dt = f_theta(h, x)`, no structure or stability guarantee -- LTC is a specific, bounded case of this |
+
 ## Liquid NNs in the wild -- further reading
 
 Papers above are the primary sources; these are more accessible write-ups and
@@ -73,8 +90,6 @@ outside a benchmark table:
 
 ## Also worth knowing about (not separately modeled here)
 
-- **Neural ODEs** (Chen et al., NeurIPS 2018, [arXiv:1806.07366](https://arxiv.org/abs/1806.07366))
-  -- the general "hidden state defined by an ODE" framework LTC specializes.
 - **S4** (Gu, Goel, Ré, ICLR 2022, [arXiv:2111.00396](https://arxiv.org/abs/2111.00396))
   -- the structured state-space model Liquid-S4 builds on.
 - **ncps** ([github.com/mlech26l/ncps](https://github.com/mlech26l/ncps)) --

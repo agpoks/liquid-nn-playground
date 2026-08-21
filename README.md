@@ -6,7 +6,8 @@
 
 A playground for **liquid neural networks**: implement, run, and benchmark
 five liquid/liquid-adjacent architectures side by side on the same datasets,
-with a Python example *and* a notebook example for each.
+with a Python example *and* a notebook example for each, plus three
+non-liquid baselines that isolate exactly what "liquid" adds.
 
 | Model | Paper | Folder |
 |---|---|---|
@@ -15,6 +16,14 @@ with a Python example *and* a notebook example for each.
 | **NCP** -- Neural Circuit Policies (sparse wiring) | Lechner et al., Nature MI 2020 | [`models/ncp`](models/ncp) |
 | **Liquid-S4** -- Liquid Structural State-Space Models | Hasani et al., ICLR 2023 | [`models/liquid_s4`](models/liquid_s4) |
 | **LrcSSM** -- Liquid-Resistance Liquid-Capacitance SSM (newest, NeurIPS 2025) | Farsang et al., 2025 | [`models/lrcssm`](models/lrcssm) |
+
+**Baselines** (not liquid, included to show what each piece of machinery buys -- see [`docs/`](docs) "How each model treats time"):
+
+| Model | Paper | Folder |
+|---|---|---|
+| **RNN** -- vanilla Elman RNN, no time-awareness at all | Elman, Cognitive Science 1990 | [`models/rnn`](models/rnn) |
+| **CT-RNN** -- continuous time, but a fixed (non-liquid) time constant | Funahashi & Nakamura, Neural Networks 1993 | [`models/ctrnn`](models/ctrnn) |
+| **Neural ODE** -- continuous time, fully general learned dynamics | Chen et al., NeurIPS 2018 | [`models/node`](models/node) |
 
 Full paper references and why each one was picked: [`papers/README.md`](papers/README.md).
 Docs: see [`docs/`](docs) (built on Read the Docs).
@@ -54,9 +63,14 @@ CfC also ships a **JAX/Flax** port (`models/cfc/model_jax.py` +
 `example_jax.py`, `pip install -e ".[jax]"`) with JAX's own
 `--device {auto,cpu,gpu,tpu}` selection, alongside the PyTorch version -- a
 quick way to compare the two frameworks on the identical architecture without
-re-implementing all five models twice.
+re-implementing all five models twice. `benchmarks/jax_vs_pytorch_cfc.py`
+trains both back to back and prints step time + accuracy side by side:
 
-## Compare all 5 models
+```bash
+python benchmarks/jax_vs_pytorch_cfc.py --device auto --epochs 15
+```
+
+## Compare all 8 models
 
 ```bash
 python benchmarks/run_all.py --config benchmarks/configs/classification_suite.yaml --device auto

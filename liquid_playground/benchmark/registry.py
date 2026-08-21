@@ -26,6 +26,9 @@ def _load_model_module(name: str):
     return module
 
 
+RNNModel = _load_model_module("rnn").RNNModel
+CTRNNModel = _load_model_module("ctrnn").CTRNNModel
+NeuralODEModel = _load_model_module("node").NeuralODEModel
 LTCModel = _load_model_module("ltc").LTCModel
 CfCModel = _load_model_module("cfc").CfCModel
 NCPModel = _load_model_module("ncp").NCPModel
@@ -39,6 +42,18 @@ from liquid_playground.data import (  # noqa: E402
     load_room_occupancy,
     load_sequential_mnist,
 )
+
+
+def _rnn_factory(input_size, output_size, hidden_size=32, **_):
+    return RNNModel(input_size, hidden_size, output_size)
+
+
+def _ctrnn_factory(input_size, output_size, hidden_size=32, **_):
+    return CTRNNModel(input_size, hidden_size, output_size)
+
+
+def _node_factory(input_size, output_size, hidden_size=32, **_):
+    return NeuralODEModel(input_size, hidden_size, output_size)
 
 
 def _ltc_factory(input_size, output_size, hidden_size=32, **_):
@@ -62,6 +77,9 @@ def _lrcssm_factory(input_size, output_size, state_size=32, n_layers=2, **_):
 
 
 MODEL_REGISTRY: dict[str, Callable] = {
+    "rnn": _rnn_factory,
+    "ctrnn": _ctrnn_factory,
+    "node": _node_factory,
     "ltc": _ltc_factory,
     "cfc": _cfc_factory,
     "ncp": _ncp_factory,
