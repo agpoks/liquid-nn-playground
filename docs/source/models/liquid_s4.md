@@ -60,6 +60,8 @@ easy-to-read sequential loop and trades the FFT-convolution speed for
 clarity; see {doc}`lrcssm` for a model in this repo that *does* ship a fast
 parallel path.
 
+![Liquid-S4 cell architecture diagram](../_static/plots/liquid_s4-1.png)
+
 ```{eval-rst}
 .. plot::
 
@@ -106,6 +108,8 @@ different state units remember over different horizons. The plot below
 shows the (input-independent) impulse response $e^{a_{\text{base}} \cdot k}$
 for a few of those units -- i.e., how much a unit that received one pulse at
 $k=0$ still "remembers" $k$ steps later, absent any liquid modulation:
+
+![Liquid-S4 multi-timescale decay plot](../_static/plots/liquid_s4-2.png)
 
 ```{eval-rst}
 .. plot::

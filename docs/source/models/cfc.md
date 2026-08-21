@@ -55,6 +55,8 @@ Every `Linear`/`Linear+Tanh` box below is the affine map from
 part specific to CfC is the mix on the right, computed once, with no ODE
 unroll at all:
 
+![CfC cell architecture diagram](../_static/plots/cfc-1.png)
+
 ```{eval-rst}
 .. plot::
 

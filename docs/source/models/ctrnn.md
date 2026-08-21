@@ -43,6 +43,8 @@ for $h$ given the previous value -- line-for-line the same shape as
 {doc}`ltc`'s `numerator / denominator` update, just without an $f$ or $A$
 anywhere in it:
 
+![CT-RNN cell architecture diagram](../_static/plots/ctrnn-1.png)
+
 ```{eval-rst}
 .. plot::
 

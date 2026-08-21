@@ -31,6 +31,8 @@ def forward(self, x_t, h_prev, dt: float = 1.0):
     return torch.tanh(self.w_in(x_t) + self.w_rec(h_prev))
 ```
 
+![RNN cell architecture diagram](../_static/plots/rnn-1.png)
+
 ```{eval-rst}
 .. plot::
 

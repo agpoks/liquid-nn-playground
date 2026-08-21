@@ -68,6 +68,8 @@ Every `Linear` box below is exactly the affine map described in
 {doc}`../getting_started` -- the parts actually specific to LTC are the
 sigmoid gate and the semi-implicit Euler solve on the right:
 
+![LTC cell architecture diagram](../_static/plots/ltc-1.png)
+
 ```{eval-rst}
 .. plot::
 
@@ -109,6 +111,8 @@ pulls the neuron to its target $A$ within the 6 sub-steps; small $f$ barely
 moves it -- exactly the fast/slow effective-time-constant behavior from the
 equation above, but seen as an actual trajectory instead of just the
 steady-state formula.
+
+![LTC semi-implicit Euler solve trajectories](../_static/plots/ltc-2.png)
 
 ```{eval-rst}
 .. plot::

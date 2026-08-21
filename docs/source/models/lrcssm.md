@@ -61,6 +61,8 @@ python models/lrcssm/example.py --device auto
 # prints: "sequential vs. parallel-scan max abs diff: 1.19e-07"
 ```
 
+![LrcSSM cell architecture diagram](../_static/plots/lrcssm-1.png)
+
 ```{eval-rst}
 .. plot::
 
@@ -107,6 +109,8 @@ what lets it run fast on a GPU/TPU even though it does more arithmetic than
 the loop. The plot below is a purely structural illustration of that
 depth trade-off (not a wall-clock benchmark -- run
 {doc}`../benchmarks` yourself for actual timings on your hardware):
+
+![LrcSSM sequential vs parallel scan depth plot](../_static/plots/lrcssm-2.png)
 
 ```{eval-rst}
 .. plot::

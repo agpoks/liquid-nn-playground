@@ -69,6 +69,8 @@ hhat = ((1.0 - s) * hhat_prev + s * q.unsqueeze(-1)) * decay     # (B, H, M)
 h = hhat.sum(dim=-1)
 ```
 
+![CT-GRU cell architecture diagram](../_static/plots/ctgru-1.png)
+
 ```{eval-rst}
 .. plot::
 

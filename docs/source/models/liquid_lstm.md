@@ -64,6 +64,8 @@ for _ in range(self.ode_unfolds):
 h = o * torch.tanh(c)
 ```
 
+![Liquid-LSTM cell architecture diagram](../_static/plots/liquid_lstm-1.png)
+
 ```{eval-rst}
 .. plot::
 

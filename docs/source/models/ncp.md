@@ -53,6 +53,8 @@ actuators.
 Zoomed out, ignoring the per-neuron LTC math (see {doc}`ltc` for that), the
 four-layer wiring itself looks like this:
 
+![NCP wiring diagram](../_static/plots/ncp-1.png)
+
 ```{eval-rst}
 .. plot::
 
@@ -93,6 +95,8 @@ appear as *sources* into command neurons, never as targets, and motor
 neurons (last block) only ever appear as *targets* -- information flows
 one-way through the layers even though the command block itself is
 recurrent.
+
+![NCP sparse recurrent wiring mask](../_static/plots/ncp-2.png)
 
 ```{eval-rst}
 .. plot::

@@ -75,6 +75,8 @@ the "liquidity" each one actually learns. LTC and LrcSSM both gate on the
 *elapsed time* for a few different learned rates (right plot), which is the
 concrete difference between "integrate an ODE" and "close the form."
 
+![LTC/LrcSSM gate on input vs CfC gate on time](_static/plots/model_comparison-1.png)
+
 ```{eval-rst}
 .. plot::
 

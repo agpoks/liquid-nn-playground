@@ -54,6 +54,8 @@ makes Neural ODEs practical at much greater depths -- see the paper Sec. 2-3,
 or [`torchdiffeq`](https://github.com/rtqichen/torchdiffeq) (the paper
 authors' own package) for a production adjoint-method solver.
 
+![Neural ODE cell architecture diagram](../_static/plots/node-1.png)
+
 ```{eval-rst}
 .. plot::
 
