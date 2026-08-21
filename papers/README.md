@@ -97,3 +97,31 @@ outside a benchmark table:
   and NCP wiring, by the same authors. Use it if you need the exact reference
   numerics; this repo's `models/` implementations are compact educational
   reimplementations aimed at side-by-side comparison and benchmarking.
+- **LTC-SE** (Bidollahkhani, Atasoy, Abdellatef, 2023,
+  [arXiv:2304.08691](https://arxiv.org/abs/2304.08691)) -- an engineering
+  extension/consolidation of LTC for embedded systems, not a new architecture.
+  Notably it also implements CTRNN, Neural ODE, and CTGRU variants side by
+  side in one TensorFlow library -- independent confirmation that CTRNN and
+  Neural ODE (both modeled in this repo's `models/ctrnn` and `models/node`)
+  are the standard comparison points for LTC in the literature, not baselines
+  invented for this repo.
+
+## "Liquid Transformer" / "Liquid LSTM"? (checked -- neither is a real architecture in this lineage)
+
+Searched specifically for these because they'd sound like plausible missing
+entries: **there is no peer-reviewed "Liquid Transformer" or "Liquid LSTM"
+architecture** from the Hasani/Lechner/Rus lineage or otherwise. What exists
+under similar-sounding names:
+
+- **Liquid AI's LFM2** is a hybrid **attention + gated short-convolution**
+  architecture for production LLMs (not built from LTC/CfC cells at all --
+  see the LFM2 note above). "Liquid" here is a company/brand name, not a
+  reference to the ODE-based mechanism this repo implements.
+- A handful of 2025-2026 application papers bolt a transformer encoder or an
+  LSTM onto a liquid layer for a specific domain (e.g. respiratory sound
+  classification, building energy forecasting) -- these are hybrids for one
+  use case, not new general-purpose architectures, and aren't part of the
+  core lineage this repo tracks.
+
+So the five liquid models plus the three baselines in this repo remain the
+complete set worth implementing from scratch here; nothing was missed.
